@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brew & Bite Café</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-brown: #4e342e;
+      --light-brown: #6d4c41;
+      --cream: #fff8e1;
+      --dark-text: #3e2723;
+      --accent: #d7ccc8;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark-text);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--light-brown);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-brown);
+    }
+    
+    /* Navbar */
+    nav.navbar {
+      background-color: var(--primary-brown);
+      padding: 15px 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav.navbar.scrolled {
+      padding: 10px 0;
+      background-color: rgba(78, 52, 46, 0.95);
+    }
+    
+    nav a.nav-link, .navbar-brand {
+      color: #fff !important;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    nav a.nav-link:hover, .navbar-brand:hover {
+      color: var(--accent) !important;
+    }
+    
+    nav a.nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a.nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      padding: 4px 8px;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    /* Hero Section */
+    header {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80')
+                  center/cover no-repeat fixed;
+      color: #fff;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      z-index: 2;
+    }
+    
+    header h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    header p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .btn-brown {
+      background-color: var(--light-brown);
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-brown:hover {
+      background-color: var(--primary-brown);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Section Styling */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+    
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      background: var(--light-brown);
+      bottom: -10px;
+      left: 20%;
+      border-radius: 2px;
+    }
+    
+    /* About Section */
+    #about {
+      background-color: #fff;
+    }
+    
+    .feature-box {
+      padding: 30px 20px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .feature-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      background-color: var(--cream);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--light-brown);
+    }
+    
+    /* Menu Section */
+    #menu {
+      background-color: var(--cream);
+    }
+    
+    .menu-item {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px 20px;
+      margin-bottom: 30px;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .menu-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--light-brown);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .menu-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .menu-item:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .menu-item h5 {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .menu-item p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .menu-price {
+      font-weight: 700;
+      color: var(--light-brown);
+      font-size: 1.2rem;
+    }
+    
+    /* Gallery Section */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .gallery-item img {
+      transition: all 0.5s ease;
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(78, 52, 46, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    
+    .gallery-icon {
+      color: white;
+      font-size: 2rem;
+    }
+    
+    /* Testimonials */
+    #reviews {
+      background-color: var(--cream);
+    }
+    
+    .testimonial-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .testimonial-card::before {
+      content: "";
+      font-size: 5rem;
+      color: var(--accent);
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Contact Section */
+    .contact-info {
+      margin-bottom: 30px;
+    }
+    
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--light-brown);
+      margin-right: 10px;
+    }
+    
+    .map-container {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--primary-brown);
+      color: #fff;
+      text-align: center;
+      padding: 40px 0;
+    }
+    
+    .social-icons {
+      margin-bottom: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      line-height: 40px;
+      color: white;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--light-brown);
+      transform: translateY(-5px);
+    }
+    
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--light-brown);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--primary-brown);
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.2rem;
+      }
+      
+      section {
+        padding: 60px 0;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Back to top button -->
+  <div class="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Brew & Bite</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="animate__animated animate__fadeInDown">Brew & Bite Café</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">Where Every Sip Tells a Story</p>
+        <a href="#menu" class="btn btn-brown btn-lg mt-3 animate__animated animate__fadeInUp animate__delay-2s">Order Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container text-center">
+      <h2 class="section-title">About Us</h2>
+      <p class="lead mx-auto mb-5" style="max-width: 700px;">
+        At Brew & Bite, we believe in slow mornings, strong coffee, and sweet moments. 
+        Founded in 2020, our café blends the aroma of premium beans with the warmth of home-style baking.
+      </p>
+      <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+          <div class="feature-box fade-in">
+            <div class="feature-icon">
+              <i class="fas fa-coffee"></i>
+            </div>
+            <h5>100% Arabica Beans</h5>
+            <p>We source only the finest Arabica beans from sustainable farms around the world.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-box fade-in">
+            <div class="feature-icon">
+              <i class="fas fa-bread-slice"></i>
+            </div>
+            <h5>Freshly Baked Pastries</h5>
+            <p>Our pastries are baked fresh daily using traditional recipes and quality ingredients.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-box fade-in">
+            <div class="feature-icon">
+              <i class="fas fa-wifi"></i>
+            </div>
+            <h5>Free Wi-Fi & Cozy Interiors</h5>
+            <p>Work or relax in our comfortable space with high-speed internet and cozy seating.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="container text-center">
+      <h2 class="section-title">Our Menu</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+          <div class="menu-item fade-in">
+            <h5>Espresso</h5>
+            <p>Rich & bold single shot.</p>
+            <div class="menu-price">₹120</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="menu-item fade-in">
+            <h5>Latte</h5>
+            <p>Perfect balance of milk & espresso.</p>
+            <div class="menu-price">₹180</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="menu-item fade-in">
+            <h5>Cold Brew</h5>
+            <p>Slow-brewed for smooth flavor.</p>
+            <div class="menu-price">₹200</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="menu-item fade-in">
+            <h5>Cappuccino</h5>
+            <p>Classic Italian coffee with frothy milk.</p>
+            <div class="menu-price">₹160</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="menu-item fade-in">
+            <h5>Croissant</h5>
+            <p>Buttery, flaky pastry - plain or filled.</p>
+            <div class="menu-price">₹90</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="menu-item fade-in">
+            <h5>Blueberry Muffin</h5>
+            <p>Moist muffin packed with fresh blueberries.</p>
+            <div class="menu-price">₹110</div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-brown mt-4">View Full Menu</a>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container text-center">
+      <h2 class="section-title">Gallery</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="gallery-item fade-in">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=60" alt="Coffee">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-item fade-in">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=60" alt="Café Interior">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-item fade-in">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=60" alt="Pastries">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="reviews">
+    <div class="container text-center">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="testimonial-card fade-in">
+            <p class="testimonial-text">"Best cold brew in town! Perfect spot to chill with friends or get some work done."</p>
+            <footer class="blockquote-footer text-light">Riya P.</footer>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="testimonial-card fade-in">
+            <p class="testimonial-text">"Love the ambiance — great place for work meetings. The coffee and pastries are always fresh!"</p>
+            <footer class="blockquote-footer text-light">Karan S.</footer>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="testimonial-card fade-in">
+            <p class="testimonial-text">"The baristas are so friendly and skilled. My latte art is always Instagram-worthy!"</p>
+            <footer class="blockquote-footer text-light">Priya M.</footer>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="testimonial-card fade-in">
+            <p class="testimonial-text">"I come here every Sunday morning. It's become my happy place with the best coffee in the city."</p>
+            <footer class="blockquote-footer text-light">Arjun K.</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container text-center">
+      <h2 class="section-title">Visit Us</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="contact-info fade-in">
+            <p><i class="fas fa-map-marker-alt contact-icon"></i> RK Iconic, Rajkot, Gujarat</p>
+            <p><i class="fas fa-clock contact-icon"></i> 8 AM – 10 PM (All Days)</p>
+            <p><i class="fas fa-phone contact-icon"></i> +91 9979412610 | <a href="https://wa.me/919979412610" target="_blank"><i class="fab fa-whatsapp contact-icon"></i></a></p>
+          </div>
+          <div class="map-container fade-in">
+            <div class="ratio ratio-16x9">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14688.262965202343!2d72.55631594999999!3d23.0224993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848d0f6fb997%3A0x6d84fe4a3e97c8a2!2sMG%20Road%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <!-- <a href="#"><i class="fab fa-tripadvisor"></i></a> -->
+    </div>
+    <p>© 2025 Brew & Bite Café | Designed by NanoStack Technologies</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      const backToTop = document.querySelector('.back-to-top');
+      
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+        backToTop.classList.add('active');
+      } else {
+        navbar.classList.remove('scrolled');
+        backToTop.classList.remove('active');
+      }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+          
+          // Close mobile menu after clicking
+          const navbarToggler = document.querySelector('.navbar-toggler');
+          const navbarCollapse = document.querySelector('.navbar-collapse');
+          if (navbarCollapse.classList.contains('show')) {
+            navbarToggler.click();
+          }
+        }
+      });
+    });
+
+    // Back to top functionality
+    document.querySelector('.back-to-top').addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Fade in animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    // Check on load and scroll
+    window.addEventListener('load', fadeInOnScroll);
+    window.addEventListener('scroll', fadeInOnScroll);
+    
+    // Initial check
+    fadeInOnScroll();
+  </script>
+</body>
+</html>
